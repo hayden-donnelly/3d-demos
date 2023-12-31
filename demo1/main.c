@@ -2,32 +2,31 @@
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 
-int main()
+const int WIDTH = 1280;
+const int HEIGHT = 720;
+
+int main() 
 {
-    printf("hello world\n");
-    /*
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    
-    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    if (glfwInit() == GLFW_FALSE) 
+    {
+        printf("Failed to intialize glfw\n");
+        return -1;
+    }
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
     if(window == NULL)
     {
-        printf("Failed to create GLFW window\n");
+        printf("Failed to create window\n");
         glfwTerminate();
         return -1;
     }
+
     glfwMakeContextCurrent(window);
 
-    if(!gladLoaderLoadGL())
-    {
-        printf("Failed to initialize GLAD\n");
+    int version = gladLoadGL(glfwGetProcAddress);
+    if (version == 0) {
+        printf("Failed to initialize OpenGL context\n");
         return -1;
-    }  
+    }
 
-    glViewport(0, 0, 800, 600);
-    return 0;
-    */
+    printf("Loaded OpenGL %d.%d\n", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
 }

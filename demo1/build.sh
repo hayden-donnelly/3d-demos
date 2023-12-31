@@ -1,3 +1,2 @@
-gcc -c main.c &&
-mv main.o builds/main.o &&
-gcc -o builds/main builds/main.o -lglfw
+gcc -o main main.c -lglfw -L ../deps/builds/ -lglad &&
+mv main builds/main
