@@ -29,21 +29,21 @@ int main()
     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
     "}\0";
 
-    const char *fragement_shader_source = 
+    const char *fragment_shader_source = 
     "out vec4 FragColor;\n";
     "void main()\n"
     "{\n"
     "   FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
     "}\n\0";
 
-    if (glfwInit() == GLFW_FALSE) 
+    if(glfwInit() == GLFW_FALSE) 
     {
         printf("Failed to intialize glfw\n");
         return -1;
     }
     glfwSetErrorCallback(error_callback);
 
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Triangle", NULL, NULL);
     if(window == NULL)
     {
         printf("Failed to create window\n");
@@ -66,7 +66,7 @@ int main()
     glCompileShader(vertex_shader);
 
     GLuint fragement_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragement_shader, 1, &fragement_shader_source, NULL);
+    glShaderSource(fragement_shader, 1, &fragment_shader_source, NULL);
     glCompileShader(fragement_shader);
 
     GLuint shader_program = glCreateProgram();
