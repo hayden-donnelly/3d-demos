@@ -1,10 +1,11 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
-const int WIDTH = 1280;
-const int HEIGHT = 720;
+const int WIDTH = 512;
+const int HEIGHT = 512;
 
 void error_callback(int error, const char* description)
 {
@@ -19,23 +20,39 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     }
 }
 
+const char* read_text_file(const char* path)
+{
+	FILE* file_ptr = fopen(path, "r");
+	if(file_ptr == NULL) 
+	{ 
+		printf("Could not open %s", path); 
+		return NULL;
+	}
+
+	uint text_length = 0;
+	char ch;
+	while(1)
+	{
+		ch = fgetc(file_ptr);
+		text_length++;
+		if(ch == EOF) { break; }
+	}
+	rewind(file_ptr);
+
+	char* text = malloc(sizeof(char)*text_length);
+	for(int i = 0; i < text_length; i++)
+	{
+		text[i] = fgetc(file_ptr);
+	}
+	fclose(file_ptr);
+	return text;
+}
+
 int main() 
 {
-    const char *vertex_shader_source = 
-    "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "}\0";
-
-    const char *fragment_shader_source = 
-    "out vec4 FragColor;\n";
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
-    "}\n\0";
-
+    const char* vertex_shader_source = read_text_file("demo1/shaders/default.vert");
+	const char* fragment_shader_source = read_text_file("demo1/shaders/default.frag");
+    
     if(glfwInit() == GLFW_FALSE) 
     {
         printf("Failed to intialize glfw\n");
@@ -79,19 +96,23 @@ int main()
 
     GLfloat vertices[] = 
     {
-        -0.5f, -0.5f * (float)(sqrt(3)) / 3.0f, 0.0f,
-        0.5f, -0.5f * (float)(sqrt(3)) / 3.0f, 0.0f,
-        0.0f, 0.5f * (float)(sqrt(3)) * 2.0f / 4.0f, 0.0f
+		// Geometry Coordinates								Texture Coordinates
+        -0.5f, -0.5f * (float)(sqrt(3)) / 3.0f, 0.0f,		0.0f, 1.0f,
+        0.5f, -0.5f * (float)(sqrt(3)) / 3.0f, 0.0f,		0.5f, 0.0f,
+        0.0f, 0.5f * (float)(sqrt(3)) * 2.0f / 4.0f, 0.0f,	1.0f, 1.0f
     };
 
     GLuint VAO, VBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    glBindVertexArray(VBO);
+    
+	glBindVertexArray(VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * 3, (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT)*5, (void*)0);
     glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT)*5, (void*)(3*sizeof(GL_FLOAT)));
+	glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
