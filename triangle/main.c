@@ -23,8 +23,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 int main() 
 {
-    const char* vertex_shader_source = read_text_file("demo1/shaders/default.vert");
-	const char* fragment_shader_source = read_text_file("demo1/shaders/default.frag");
+    const char* vertex_shader_source = read_text_file("triangle/default.vert");
+    const char* fragment_shader_source = read_text_file("triangle/default.frag");
     
     if(glfwInit() == GLFW_FALSE) 
     {
