@@ -6,6 +6,6 @@ out vec2 fragment_pos;
 
 void main()
 {
-	gl_Position = vec4(vertex_pos.x, vertex_pos.y, vertex_pos.z, 1.0);
-	fragment_pos = texture_pos;
+    gl_Position = vec4(vertex_pos.x, vertex_pos.y, vertex_pos.z, 1.0);
+    fragment_pos = texture_pos;
 }
