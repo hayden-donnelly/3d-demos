@@ -92,9 +92,11 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-
+    GLuint time_location = glGetUniformLocation(shader_program, "u_time");
+    
     while(!glfwWindowShouldClose(window))
     {
+        glUniform1f(time_location, glfwGetTime());
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
