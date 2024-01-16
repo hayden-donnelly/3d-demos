@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <text-loader/loader.h>
+#include <demo-utils/loader.h>
 
 const char* read_text_file(const char* path)
 {

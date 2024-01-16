@@ -16,7 +16,7 @@
         inherit (nixpkgs) lib;
         pkgs = import nixpkgs { inherit system; };
         glad = ./deps/glad;
-        text-loader = ./deps/text-loader;
+        demo-utils = ./deps/demo-utils;
     in {
         devShells = let
             overlays = [ inputs.nixgl.overlays.default self.overlays.default ];
@@ -27,7 +27,7 @@
                     gcc9
                     glfw
                     glad
-                    text-loader
+                    demo-utils
                 ];
             };
         };
