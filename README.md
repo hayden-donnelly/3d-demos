@@ -15,7 +15,7 @@ Then create a development shell with Nix.
 nix develop
 ```
 
-Finally, build the vendored dependencies:
+Finally, build the local dependencies:
 ```
 bash build_deps.sh
 ```
