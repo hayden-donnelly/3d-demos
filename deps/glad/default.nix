@@ -1,6 +1,5 @@
 {
     stdenv,
-    ar,
     ...
 }:
 stdenv.mkDerivation {

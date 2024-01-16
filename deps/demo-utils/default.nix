@@ -3,7 +3,7 @@
     ...
 }:
 stdenv.mkDerivation {
-    pname = "text-loader";
+    pname = "demo-utils";
     version = "v0.0.0";
     src = ./src;
     buildPhase = ''

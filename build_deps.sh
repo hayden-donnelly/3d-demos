@@ -1,13 +1,17 @@
 mkdir -p deps/builds/
+cd deps
 
 # glad
-gcc -c deps/glad/src/gl.c &&
+cd glad &&
+gcc -c src/gl.c &&
 ar rcs libglad.a gl.o &&
 rm gl.o &&
-mv libglad.a deps/builds/
+mv libglad.a ../builds/ &&
+cd ..
 
-# text-loader
-gcc -c deps/text-loader/src/loader.c &&
-ar rcs libtext-loader.a loader.o &&
-rm loader.o &&
-mv libtext-loader.a deps/builds/
+# demo-utils
+cd demo-utils &&
+gcc -c src/loader.c src/fragctx.c -lglfw -L ../builds/ -lglad &&
+ar rcs libdemo-utils.a loader.o fragctx.o &&
+rm loader.o fragctx.o &&
+mv libdemo-utils.a ../builds/
