@@ -12,24 +12,22 @@
         };
     };
     outputs = inputs@{ self, nixpkgs, flake-utils, ... }: 
-    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system: let
-        inherit (nixpkgs) lib;
-        pkgs = import nixpkgs { inherit system; };
-        glad = ./deps/glad;
-        demo-utils = ./deps/demo-utils;
-    in {
-        devShells = let
-            overlays = [ inputs.nixgl.overlays.default self.overlays.default ];
+        flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system: 
+        let
+            inherit (nixpkgs) lib;
+            pkgs = import nixpkgs { inherit system; };
         in {
-            default = pkgs.mkShell {
-                name = "opengl";
-                buildInputs = with pkgs; [
-                    gcc9
-                    glfw
-                    glad
-                    demo-utils
-                ];
+            devShells = let
+                overlays = [ inputs.nixgl.overlays.default self.overlays.default ];
+            in {
+                default = pkgs.mkShell {
+                    name = "opengl";
+                    buildInputs = with pkgs; [
+                        gcc9
+                        glfw
+                    ];
+                };
             };
-        };
-    });
+        }
+    );
 }
