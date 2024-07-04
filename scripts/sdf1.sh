@@ -1,6 +1,7 @@
 mkdir -p build &&
-echo $(pwd) &&
-gcc -o ./src/sdf1/main ./src/sdf1/main.c -lglfw -L ./build/ -lglad -ldemo-common -I ./external/glad/include/ &&
-rm ./src/sdf1/main.o &&
-mv ./main ./build/sdf1 &&
+cd ./src &&
+gcc -c ./common/loader.c ./common/fragctx.c ./sdf1/main.c -I ../external/glad/include/ &&
+gcc -o ../build/sdf1 ./loader.o ./fragctx.o ./main.o -L ../build/ -lglad -lglfw &&
+rm ./loader.o ./fragctx.o ./main.o &&
+cd .. &&
 ./build/sdf1

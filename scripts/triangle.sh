@@ -1,3 +1,7 @@
-gcc -o triangle/main triangle/main.c -lglfw -L deps/builds/ -lglad -ltext-loader &&
-mv triangle/main triangle/builds/main &&
-triangle/builds/main
+mkdir -p build &&
+cd ./src &&
+gcc -c ./triangle/main.c -I ../external/glad/include/ &&
+gcc -o ../build/triangle ./main.o -L ../build/ -lglad -lglfw &&
+rm ./main.o &&
+cd .. &&
+./build/triangle
