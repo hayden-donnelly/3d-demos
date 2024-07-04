@@ -17,9 +17,9 @@ nix develop
 
 Finally, build the local dependencies:
 ```
-bash build_deps.sh
+bash scripts/build_deps.sh
 ```
 
 ## Running Demos
 Demos can be built and run by calling their corresponding shell script.
-For example, ``bash demo1.sh`` will build and run ``demo1``.
+For example, ``bash scripts/sdf1.sh`` will build and run ``sdf1``.

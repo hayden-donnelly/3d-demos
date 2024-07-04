@@ -1,4 +1,5 @@
 #include "fragctx.h"
+#include "../shader_sources.h"
 
 void error_callback(int error, const char* description)
 {
@@ -14,7 +15,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 }
 
 int run_frag_context(
-    const char* fragment_shader_path, 
+    const char* fragment_shader_source, 
     const int window_height, 
     const int window_width, 
     const char* window_title
@@ -44,12 +45,11 @@ int run_frag_context(
     }
     printf("Loaded OpenGL %d.%d\n", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
 
-    const char* vertex_shader_source = read_text_file("./src/general_shaders/simple_fragctx.vert");
+    const char* vertex_shader_source = simple_frag_ctx_vert_source;
     GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader, 1, &vertex_shader_source, NULL);
     glCompileShader(vertex_shader);
 
-    const char* fragment_shader_source = read_text_file(fragment_shader_path);
     GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment_shader, 1, &fragment_shader_source, NULL);
     glCompileShader(fragment_shader);
