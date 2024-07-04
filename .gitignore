@@ -1,2 +1,3 @@
 builds/
 build/
+./src/shader_sources.h
