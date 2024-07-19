@@ -2,31 +2,17 @@
 3D graphics demos with OpenGL.
 
 ## Building and Running
-To build, use:
+1. Create build directory and cd into it.
 ```
-make all
+mkdir build && cd build
 ```
 
-To build and run, use:
+2. Generate Makefiles with CMake.
+```
+cmake .. -D GLFW_BUILD_WAYLAND=0
+```
+
+3. Build and run with Make.
 ```
 make run
-```
-
-## Development Environment
-First clone the repo and cd into it.
-```
-git clone https://github.com/hayden-donnelly/3d-demos.git
-```
-```
-cd 3d-demos
-```
-
-Then create a development shell with Nix.
-```
-nix develop
-```
-
-Finally, build the local dependencies:
-```
-bash scripts/build_deps.sh
 ```

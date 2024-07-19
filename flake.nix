@@ -15,17 +15,33 @@
         flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system: 
         let
             inherit (nixpkgs) lib;
-            pkgs = import nixpkgs { inherit system; };
+
+            pkgs = import nixpkgs { 
+                inherit system; 
+                overlays = [
+                    inputs.nixgl.overlays.default
+                ]; 
+            };
         in {
-            devShells = let
-                overlays = [ inputs.nixgl.overlays.default self.overlays.default ];
-            in {
-                default = pkgs.mkShell {
-                    name = "opengl";
+            devShells = {
+                default = pkgs.mkShell rec {
+                    name = "opengl-x11";
                     buildInputs = with pkgs; [
-                        gcc9
-                        glfw
+                        libxkbcommon
+                        xorg.libX11
+                        xorg.libXrandr
+                        xorg.libXinerama
+                        xorg.libXcursor
+                        xorg.libXi
+                        xorg.libXext
+                        gcc
+                        cmake
+                        gnumake
                     ];
+                    shellHook = ''
+                        source <(sed -Ee '/\$@/d' ${lib.getExe pkgs.nixgl.nixGLIntel})
+                        source <(sed -Ee '/\$@/d' ${lib.getExe pkgs.nixgl.auto.nixGLNvidia}*)
+                    '';
                 };
             };
         }
