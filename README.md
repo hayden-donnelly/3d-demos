@@ -1,17 +1,6 @@
 # 3d-demos
 3D graphics demos with OpenGL.
 
-## Building and Running
-To build, use:
-```
-make all
-```
-
-To build and run, use:
-```
-make run
-```
-
 ## Development Environment
 First clone the repo and cd into it.
 ```
@@ -26,7 +15,13 @@ Then create a development shell with Nix.
 nix develop
 ```
 
-Finally, build the local dependencies:
+## Building and Running
+To build, use:
 ```
-bash scripts/build_deps.sh
+make all
+```
+
+To build and run, use:
+```
+make run
 ```
