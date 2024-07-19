@@ -1,6 +1,17 @@
 # 3d-demos
 3D graphics demos with OpenGL.
 
+## Building and Running
+To build, use:
+```
+make all
+```
+
+To build and run, use:
+```
+make run
+```
+
 ## Development Environment
 First clone the repo and cd into it.
 ```
@@ -19,7 +30,3 @@ Finally, build the local dependencies:
 ```
 bash scripts/build_deps.sh
 ```
-
-## Running Demos
-Demos can be built and run by calling their corresponding shell script.
-For example, ``bash scripts/sdf1.sh`` will build and run ``sdf1``.
