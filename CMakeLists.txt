@@ -23,18 +23,18 @@ set(GLFW_BUILD_X11 ON)
 add_subdirectory(${GLFW_DIR} ${CMAKE_BINARY_DIR}/glfw)
 
 # Add SDF1 executable.
-set(SDF1_SRCS
+set(DEMOS_SRCS
     ${SRC_DIR}/common/fragctx.c
     ${SRC_DIR}/sdf1.c
 )
 
-add_executable(sdf1 ${SDF1_SRCS})
+add_executable(demos ${DEMOS_SRCS})
 
 # Include directories.
-target_include_directories(sdf1 PRIVATE ${GLAD_DIR}/include)
+target_include_directories(demos PRIVATE ${GLAD_DIR}/include)
 
 # Link libraries.
-target_link_libraries(sdf1 PRIVATE glad glfw)
+target_link_libraries(demos PRIVATE glad glfw)
 
 # Custom command to generate shader header.
 add_custom_command(
@@ -46,17 +46,17 @@ add_custom_command(
 
 # Add shader header as a dependency.
 add_custom_target(generate_shader_header DEPENDS ${CMAKE_BINARY_DIR}/shaders.h)
-add_dependencies(sdf1 generate_shader_header)
+add_dependencies(demos generate_shader_header)
 
 # Set output directory.
-set_target_properties(sdf1 PROPERTIES
+set_target_properties(demos PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR}
 )
 
 # Custom target for running the executable.
 add_custom_target(run
-    COMMAND ${BUILD_DIR}/sdf1
-    DEPENDS sdf1
+    COMMAND ${BUILD_DIR}/demos
+    DEPENDS demos
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
 
