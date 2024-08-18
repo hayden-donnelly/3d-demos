@@ -1,0 +1,4 @@
+-isystem
+./external/glad/include
+-isystem
+./external/glfw/include
