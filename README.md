@@ -1,27 +1,42 @@
 # 3d-demos
 3D graphics demos with OpenGL.
 
-## Development Environment
-First clone the repo and cd into it.
-```
-git clone https://github.com/hayden-donnelly/3d-demos.git
-```
-```
-cd 3d-demos
-```
+## Dependencies
+- gcc
+- cmake
+- glfw (included in repo)
+- glad (included in repo)
+- libkbcommon
+- libX11
+- libXi
+- libXcursor
+- libXext
+- libXinerama
+- libXrandr
+- libXrender
 
-Then create a development shell with Nix.
-```
-nix develop
-```
+The dependencies which aren't included in this repo can be access through a Nix dev shell
+by executing `nix develop` provided that you have Nix installed and Flakes enabled.
 
 ## Building and Running
-To build, use:
+### CMake
+1. Create build directory.
 ```
-make all
+mkdir build
 ```
-
-To build and run, use:
+2. CD into build directory.
 ```
-make run
+cd build
+```
+3. Configure build with CMake.
+```
+cmake ..
+```
+4. Build with Make.
+```
+make
+```
+5. Run the program.
+```
+./sdf1
 ```
