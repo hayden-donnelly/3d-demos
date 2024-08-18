@@ -38,5 +38,5 @@ make
 ```
 5. Run the program.
 ```
-./sdf1
+./demos
 ```
